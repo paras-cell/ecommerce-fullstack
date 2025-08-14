@@ -1,0 +1,19 @@
+{
+    "slides": [
+      {
+        "id":"0",
+        "src": "./photo7.png",
+        "alt": "Image 1 for carousel"
+      },
+      {
+        "id":"2",
+        "src": "./photo8.png",
+        "alt": "Image 2 for carousel"
+      },
+      {
+        "id":"3",
+        "src": "./photo9.png",
+        "alt": "Image 3 for carousel"
+      }
+    ]
+  }

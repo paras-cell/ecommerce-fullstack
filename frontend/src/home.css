@@ -1,0 +1,89 @@
+/* body.css */
+* {
+    margin: 0%;
+    padding: 0%;
+}
+
+.main-container {
+    height: auto;
+    width: 100%;
+}
+
+.ad-offer {
+    height: auto;
+    width: 100%;
+    padding: 6px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.offer,
+.offer2 {
+    height: 80px;
+    width: 95%;
+    background-image: url("free-div.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50px;
+}
+
+.offer {
+    background-image: url("offer.png");
+}
+
+@media (max-width:1100px) {
+
+    .offer,
+    .offer2 {
+        background-size: contain;
+        background-position: center;
+    }
+
+    .offer2 {
+        background-color: black;
+    }
+}
+
+.lable {
+    height: 100px;
+    padding-left: 40px;
+    font-size: xx-large;
+    color: rgb(61, 60, 60);
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+}
+
+.category {
+    height: auto;
+    width: 95%;
+    padding: 30px;
+}
+
+.back {
+    height: auto;
+    width: 100%;
+    padding-top: 10px;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: bisque;
+    border-radius: 10px;
+}
+
+.hover,
+.catgory-image {
+    height: 260px;
+    width: 182px;
+    display: flex;
+    align-items: center;
+}
+
+.catimg {
+    height: 250px;
+}
+
+.catimg:hover {
+    height: 260px;
+}
