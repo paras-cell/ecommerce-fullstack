@@ -9,17 +9,10 @@ export const sendEmail = async (to, text) => {
     },
   });
 
-  const mailOptions = {
+  await transporter.sendMail({
     from: process.env.EMAIL_USER,
     to,
-    subject: 'OTP Verification',
+    subject: 'Your OTP Code',
     text,
-  };
-
-  try {
-    await transporter.sendMail(mailOptions);
-  } catch (error) {
-    console.error('Email sending failed:', error);
-    throw new Error('Email failed');
-  }
+  });
 };

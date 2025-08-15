@@ -1,69 +1,158 @@
 import "./login.css";
-import React, { useRef, forwardRef, useImperativeHandle } from 'react';
+import React, {
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+  useState,
+  useEffect,
+} from "react";
 
-const login= forwardRef((props, ref) => {
+const Login = forwardRef((props, ref) => {
+  const logreff = useRef(null);
+  const [userEmail, setUserEmail] = useState(null);
 
-    const logreff = useRef(null);
+  // Capitalize only the first word
+  const capitalizeFirstWord = (str) => {
+    const firstWord = str.split(/[^a-zA-Z0-9]/)[0];
+    return firstWord.charAt(0).toUpperCase() + firstWord.slice(1);
+  };
 
-     useImperativeHandle(ref, () => ({
-            HoverEffect() {
-                if (logreff.current) {
-                    logreff.current.style.visibility = 'visible';
-                    logreff.current.style.opacity = '1';
-                    logreff.current.style.transition = "0.5s ease-in-out";
-                }
-            },
-            HoverEffectleave() {
-                if (logreff.current) {
-                    logreff.current.style.visibility = 'hidden';
-                    logreff.current.style.opacity = '0';
-                }
-            },
-        }));
+  // Initial load from localStorage
+  useEffect(() => {
+    const email = localStorage.getItem("userEmail");
+    if (email) {
+      const namePart = email.split("@")[0];
+      setUserEmail(capitalizeFirstWord(namePart));
+    }
+  }, []);
 
-       function HoverEffect() {
-            if (logreff.current) {
-                logreff.current.style.visibility = 'visible';
-                logreff.current.style.opacity = '1';
-                logreff.current.style.transition = "0.5s ease-in-out";
-            }
-            if (props.onHover) {
-                props.onHover(true);
-            }
-        }
-       function HoverEffectleave() {
-            if (logreff.current) {
-                logreff.current.style.visibility = 'hidden';
-                logreff.current.style.opacity = '0';
-                logreff.current.style.transition = "0.3s";
-            }
-            if (props.onHover) {
-                props.onHover(false);
-            }
-        }
+  // Listen for localStorage changes (cross-tab or programmatic)
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const email = localStorage.getItem("userEmail");
+      if (email) {
+        const namePart = email.split("@")[0];
+        setUserEmail(capitalizeFirstWord(namePart));
+      } else {
+        setUserEmail(null);
+      }
+    };
 
-    return(
-        <div className="profile-container" ref={logreff} onMouseEnter={HoverEffect} onMouseLeave={HoverEffectleave} >
-            <div className="login-button-dis">
-                <h3>Welcome</h3>
-                <span>To access account and manage order</span>
-                <a href="/Login"><button className="login-button">login/signup</button></a>
-            </div>
-            <div className="hrtag"></div>
-            <div className="user-tools">
-                <ul className="tools">
-                    <li className="tool"><a href="">order</a></li>
-                    <li className="tool"><a href="">Wishlist</a></li>
-                    <li className="tool"><a href="">giftcard</a></li>
-                    <li className="tool"><a href="">contact us</a></li>
-                    <div className="hrtag"></div>
-                    <li className="tool"><a href="">coupons</a></li>
-                    <li className="tool"><a href="">saved coupons</a></li>
-                    <li className="tool"><a href="">saved address</a></li>
-                </ul>
-            </div>
+    window.addEventListener("storage", handleStorageChange);
+
+    // Polling fallback for same-tab updates
+    const interval = setInterval(handleStorageChange, 1000);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      clearInterval(interval);
+    };
+  }, []);
+
+  useImperativeHandle(ref, () => ({
+    HoverEffect() {
+      if (logreff.current) {
+        logreff.current.style.visibility = "visible";
+        logreff.current.style.opacity = "1";
+        logreff.current.style.transition = "0.5s ease-in-out";
+      }
+    },
+    HoverEffectleave() {
+      if (logreff.current) {
+        logreff.current.style.visibility = "hidden";
+        logreff.current.style.opacity = "0";
+      }
+    },
+  }));
+
+  function HoverEffect() {
+    if (logreff.current) {
+      logreff.current.style.visibility = "visible";
+      logreff.current.style.opacity = "1";
+      logreff.current.style.transition = "0.5s ease-in-out";
+    }
+    if (props.onHover) {
+      props.onHover(true);
+    }
+  }
+
+  function HoverEffectleave() {
+    if (logreff.current) {
+      logreff.current.style.visibility = "hidden";
+      logreff.current.style.opacity = "0";
+      logreff.current.style.transition = "0.3s";
+    }
+    if (props.onHover) {
+      props.onHover(false);
+    }
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("token");
+    setUserEmail(null);
+  };
+
+  const getLink = (path) => (userEmail ? path : "/Login");
+
+  return (
+    <div
+      className="profile-container"
+      ref={logreff}
+      onMouseEnter={HoverEffect}
+      onMouseLeave={HoverEffectleave}
+    >
+      {userEmail ? (
+        <div className="profile-info">
+          <h3 className="text-name">{userEmail}</h3>
+          <a href="/profile">
+            <button className="login-button logout">Profile</button>
+          </a>
         </div>
-    )
-})
+      ) : (
+        <div className="login-button-dis">
+          <h3>Welcome</h3>
+          <span>To access account and manage order</span>
+          <a href="/Login">
+            <button className="login-button">login/signup</button>
+          </a>
+        </div>
+      )}
 
-export default login;
+      <div className="hrtag"></div>
+      <div className="user-tools">
+        <ul className="tools">
+          <li className="tool">
+            <a href={getLink("/orders")}>Order</a>
+          </li>
+          <li className="tool">
+            <a href={getLink("/wishlist")}>Wishlist</a>
+          </li>
+          <li className="tool">
+            <a href={getLink("/men")}>Gift Card</a>
+          </li>
+          <li className="tool">
+            <a href={getLink("/contact")}>Contact Us</a>
+          </li>
+          <div className="hrtag"></div>
+          <li className="tool">
+            <a href={getLink("/coupons")}>Coupons</a>
+          </li>
+          <li className="tool">
+            <a href={getLink("/saved-coupons")}>Saved Coupons</a>
+          </li>
+          <li className="tool">
+            <a href={getLink("/saved-address")}>Saved Address</a>
+          </li>
+        </ul>
+        {userEmail && (
+          <button className="login-button logout" onClick={handleLogout}>
+            Logout
+          </button>
+        )}
+      </div>
+    </div>
+  );
+});
+
+export default Login;
