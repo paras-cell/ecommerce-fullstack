@@ -29,7 +29,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="container">
-        <div className="logo"></div>
+        <div className="logo"><a href="/" style={{display: "block",height: "100%"}}></a></div>
 
         <nav className="navbar">
           <div className="nav-item">
@@ -145,7 +145,7 @@ const Header = () => {
 
 
           <div>
-            <a href="#" className="main-item">
+            <a href="/wishlist" className="main-item">
               <span
                 className="pofile-icon"
                 style={{ backgroundImage: "url(OIP4.jpg)" }}

@@ -84,7 +84,7 @@ const OtpLoginPage = () => {
   return (
     <div className='outer-container'>
       <div className='container-login'>
-        <h2 className='title'>OTP Login</h2>
+        <h2 className='title'>Login</h2>
 
         {step === 1 ? (
           <>

@@ -5,25 +5,23 @@ import Filter from "../components/side_filters.jsx";
 import UpperFilter from "../components/upper_filter.jsx";
 import data from "../product_data/tshirt.jsx";
 
-function tshirt() {
-  const [selectedFilters, setSelectedFilters] = useState([]); // Store multiple filters
-  const [sortedData, setSortedData] = useState(data); // State to store sorted data
+function Tshirt() {
+  const [selectedFilters, setSelectedFilters] = useState([]);
+  const [sortedData, setSortedData] = useState(data);
 
   // Filter logic
   const handleChange = (e) => {
-    const value = e.target.value.toLowerCase(); // Convert to lowercase for case-insensitive comparison
-    setSelectedFilters((prevFilters) => {
-      if (prevFilters.includes(value)) {
-        return prevFilters.filter((filter) => filter !== value); // Remove the filter
-      } else {
-        return [...prevFilters, value]; // Add the filter
-      }
-    });
+    const value = e.target.value.toLowerCase();
+    setSelectedFilters((prevFilters) =>
+      prevFilters.includes(value)
+        ? prevFilters.filter((filter) => filter !== value)
+        : [...prevFilters, value]
+    );
   };
 
   const filteredData = (products, filters) => {
-    if (filters.length === 0) return products; // Return all products if no filters are applied
-  
+    if (filters.length === 0) return products;
+
     return products.filter((product) => {
       const fields = {
         color: product.color.toLowerCase(),
@@ -32,28 +30,25 @@ function tshirt() {
         off: product.off,
         gender: product.gender.toLowerCase(),
       };
-  
-      // Prioritize filters: gender > brand > price > color > off
-      const genderMatch = filters.includes(fields.gender); // Gender filter
-      const brandMatch = filters.includes(fields.brand); // Brand filter
+
+      const genderMatch = filters.includes(fields.gender);
+      const brandMatch = filters.includes(fields.brand);
       const priceMatch = filters.some((filter) => {
         if (filter.includes("-")) {
           const [min, max] = filter.split("-").map(Number);
-          return fields.price >= min && fields.price <= max; // Price range filter
+          return fields.price >= min && fields.price <= max;
         }
         return false;
       });
-      const colorMatch = filters.includes(fields.color); // Dynamic color filter
-      const offMatch = filters.includes(fields.off); // Off filter
-  
-      // Ensure all prioritized filters match 
+      const colorMatch = filters.includes(fields.color);
+      const offMatch = filters.includes(fields.off);
+
       return (
         (!filters.some((f) => ["men", "women", "boy", "girl"].includes(f)) || genderMatch) &&
-        (!filters.some((f) => ["highlander", "solestore"].includes(f))  || brandMatch) &&
+        (!filters.some((f) => ["highlander", "solestore"].includes(f)) || brandMatch) &&
         (!filters.some((f) => f.includes("-")) || priceMatch) &&
-        (!filters.some((f) => ["white", "black" , "pink"].includes(f))|| colorMatch) &&
-        (!filters.some((f) => !isNaN(Number(f))) || offMatch) 
-        
+        (!filters.some((f) => ["white", "black", "pink"].includes(f)) || colorMatch) &&
+        (!filters.some((f) => !isNaN(Number(f))) || offMatch)
       );
     });
   };
@@ -68,10 +63,10 @@ function tshirt() {
     } else if (sortOption === "price: higher to lower") {
       sorted.sort((a, b) => b.price - a.price);
     } else {
-      sorted = [...data]; // Reset to original data
+      sorted = [...data];
     }
 
-    setSortedData(sorted); // Update state with sorted products
+    setSortedData(sorted);
   };
 
   const result = filteredData(sortedData, selectedFilters);
@@ -84,17 +79,7 @@ function tshirt() {
         {result.length ? (
           <div className="fill-container">
             {result.map((product) => (
-              <Card
-                key={product.key}
-                image={product.image}
-                brand={product.brand}
-                details={product.details}
-                price={product.price}
-                orgprice={product.orgprice}
-                off={product.off}
-                color={product.color}
-                gender={product.gender}
-              />
+              <Card key={product.id} {...product} />
             ))}
           </div>
         ) : (
@@ -110,4 +95,4 @@ function tshirt() {
   );
 }
 
-export default tshirt;
+export default Tshirt;
