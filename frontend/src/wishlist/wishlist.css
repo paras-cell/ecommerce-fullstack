@@ -1,0 +1,43 @@
+.remove-button {
+    margin-top: 10px;
+    background: #BDBDBD;
+    color: white;
+    border: none;
+    /* padding: 6px 12px; */
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    top: -340px;
+    left: 153px;
+    width: 20px;
+
+}
+
+.wishlist-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9%;
+    margin: 33px 94px;
+}
+
+.Bag{
+    height: 34px;
+    width: 100%;
+    position: relative;
+    top: -17px;
+    background-color: #F5F5F5;
+    border-bottom: solid 1px #80808061;
+    border-top: solid 1px #80808061;
+    border-left: solid transparent;
+    border-right: solid transparent;
+    cursor: pointer;
+    color: deeppink;
+    font-size: medium;
+}
+
+.wishlist-card{
+    margin-bottom: 50px;
+    border-left: 1px solid #80808061;
+    border-right: 1px solid #80808061;
+    height: 381px;
+}

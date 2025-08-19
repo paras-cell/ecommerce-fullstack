@@ -145,7 +145,7 @@ const Header = () => {
 
 
           <div>
-            <a href="/wishlist" className="main-item">
+            <a href="/wishlist" className="main-item hover">
               <span
                 className="pofile-icon"
                 style={{ backgroundImage: "url(OIP4.jpg)" }}
@@ -154,7 +154,7 @@ const Header = () => {
             </a>
           </div>
           <div>
-            <a href="#" className="main-item">
+            <a href="#" className="main-item hover">
               <span
                 className="pofile-icon"
                 style={{ backgroundImage: "url(OIP5.jpg)" }}

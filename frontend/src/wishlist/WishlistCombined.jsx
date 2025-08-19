@@ -1,5 +1,6 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import "../components/card.css";
+import "./wishlist.css"
 
 const WishlistContext = createContext();
 
@@ -10,7 +11,6 @@ export const WishlistProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    console.log("Wishlist updated:", wishlist);
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
   }, [wishlist]);
 
@@ -63,31 +63,24 @@ export default function WishlistPage() {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>Your Wishlist</h2>
+      <h3 style={{marginLeft:"80px",fontSize:"X-large"}}>My Wishlist ({wishlist.length})</h3>
       {Array.isArray(wishlist) && wishlist.length > 0 ? (
         <div className="wishlist-grid">
           {wishlist.map((item, index) => (
             <div key={index} className="wishlist-card">
-              <img src={item.image} alt={item.brand} width="150" />
+              <img src={item.image} alt={item.brand} width="180" />
               <h3>{item.brand}</h3>
               <p>{item.details}</p>
               <p><b>Rs.{item.price}</b></p>
               <p style={{ textDecoration: "line-through" }}>Rs.{item.orgprice}</p>
               <p style={{ color: "orange" }}>({item.off}% off)</p>
-              <button
-                style={{
-                  marginTop: "10px",
-                  background: "#ff4d4d",
-                  color: "white",
-                  border: "none",
-                  padding: "6px 12px",
-                  borderRadius: "4px",
-                  cursor: "pointer",
-                }}
-                onClick={() => removeFromWishlist(item.id)}
-              >
-                ❌ Remove
+              <button className="remove-button" onClick={() => removeFromWishlist(item.id)}>
+                X
               </button>
+              <button className="Bag" onClick={() => removeFromWishlist(item.id)}>
+                Move to Bag
+              </button>
+
             </div>
           ))}
         </div>
