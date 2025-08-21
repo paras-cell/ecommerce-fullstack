@@ -154,7 +154,7 @@ const Header = () => {
             </a>
           </div>
           <div>
-            <a href="#" className="main-item hover">
+            <a href="/cart" className="main-item hover">
               <span
                 className="pofile-icon"
                 style={{ backgroundImage: "url(OIP5.jpg)" }}

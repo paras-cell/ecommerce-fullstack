@@ -1,4 +1,4 @@
-import Loginpage from "./OtpLoginPage.jsx"
+import Loginpage from "./login/OtpLoginPage.jsx"
 function men (){
   return(
     <div className="men-container">

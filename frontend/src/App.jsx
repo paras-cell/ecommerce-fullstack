@@ -5,8 +5,10 @@ import MenPage from "./men.jsx";
 import Header from "./Header.jsx";
 import Footer from "./components/Footer.jsx";
 import Tshirt from "./filterpage/tshirt.jsx";
-import Loginpage from "./OtpLoginPage.jsx";
+import Loginpage from "./login/OtpLoginPage.jsx";
 import WishlistPage from "./wishlist/WishlistCombined.jsx";
+import CartPage from "./wishlist/cartpage.jsx";
+import ProtectedRoute from "./pProtectedRoute.jsx"; // ✅ Import this
 
 function App() {
   return (
@@ -18,7 +20,23 @@ function App() {
         <Route path="/men" element={<MenPage />} />
         <Route path="/tshirt" element={<Tshirt />} />
         <Route path="/login" element={<Loginpage />} />
-       <Route path="/wishlist" element={<WishlistPage />} />
+        {/* ✅ Wrap protected routes */}
+        <Route
+          path="/wishlist"
+          element={
+            <ProtectedRoute>
+              <WishlistPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <ProtectedRoute>
+              <CartPage />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
       <Footer />
     </Router>

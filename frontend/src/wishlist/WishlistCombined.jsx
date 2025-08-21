@@ -1,6 +1,7 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import "../components/card.css";
-import "./wishlist.css"
+import "./wishlist.css";
+import { CartContext } from "./cartpage"; // ✅ Added for cart functionality
 
 const WishlistContext = createContext();
 
@@ -60,10 +61,13 @@ export const WishlistProvider = ({ children }) => {
 
 export default function WishlistPage() {
   const { wishlist, removeFromWishlist } = useContext(WishlistContext);
+  const { addToCart } = useContext(CartContext); // ✅ Access cart function
 
   return (
     <div style={{ padding: "20px" }}>
-      <h3 style={{marginLeft:"80px",fontSize:"X-large"}}>My Wishlist ({wishlist.length})</h3>
+      <h3 style={{ marginLeft: "80px", fontSize: "X-large" }}>
+        My Wishlist ({wishlist.length})
+      </h3>
       {Array.isArray(wishlist) && wishlist.length > 0 ? (
         <div className="wishlist-grid">
           {wishlist.map((item, index) => (
@@ -74,13 +78,21 @@ export default function WishlistPage() {
               <p><b>Rs.{item.price}</b></p>
               <p style={{ textDecoration: "line-through" }}>Rs.{item.orgprice}</p>
               <p style={{ color: "orange" }}>({item.off}% off)</p>
-              <button className="remove-button" onClick={() => removeFromWishlist(item.id)}>
+              <button
+                className="remove-button"
+                onClick={() => removeFromWishlist(item.id)}
+              >
                 X
               </button>
-              <button className="Bag" onClick={() => removeFromWishlist(item.id)}>
+              <button
+                className="Bag"
+                onClick={() => {
+                  addToCart(item); // ✅ Add to cart
+                  removeFromWishlist(item.id); // ✅ Remove from wishlist
+                }}
+              >
                 Move to Bag
               </button>
-
             </div>
           ))}
         </div>
