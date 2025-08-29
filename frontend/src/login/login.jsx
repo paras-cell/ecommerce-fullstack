@@ -123,16 +123,13 @@ const Login = forwardRef((props, ref) => {
       <div className="user-tools">
         <ul className="tools">
           <li className="tool">
-            <a href={getLink("/orders")}>Order</a>
+            <a href={getLink("/order-history")}>Order</a>
           </li>
           <li className="tool">
             <a href={getLink("/wishlist")}>Wishlist</a>
           </li>
           <li className="tool">
-            <a href={getLink("/men")}>Gift Card</a>
-          </li>
-          <li className="tool">
-            <a href={getLink("/contact")}>Contact Us</a>
+            <a href={getLink("/showdaddress")}>Saved Address</a>
           </li>
           <div className="hrtag"></div>
           <li className="tool">
@@ -142,7 +139,7 @@ const Login = forwardRef((props, ref) => {
             <a href={getLink("/saved-coupons")}>Saved Coupons</a>
           </li>
           <li className="tool">
-            <a href={getLink("/saved-address")}>Saved Address</a>
+            <a href={getLink("/contact")}>Contact Us</a>
           </li>
         </ul>
         {userEmail && (

@@ -77,12 +77,29 @@ export const CartProvider = ({ children }) => {
     setTimeout(() => toast.remove(), 3000);
   };
 
+  // ✅ Add totals to context
+  const totalOrgPrice = cart.reduce(
+    (sum, item) => sum + item.orgprice * item.quantity,
+    0
+  );
+
+  const totalPrice = cart.reduce(
+    (sum, item) => sum + (item.basePrice ?? item.price) * item.quantity,
+    0
+  );
+
+  const totalDiscount = totalOrgPrice - totalPrice;
+
   const value = {
     cart,
+    setCart,
     addToCart,
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
+    totalPrice,
+    totalOrgPrice,
+    totalDiscount,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
@@ -90,19 +107,17 @@ export const CartProvider = ({ children }) => {
 
 // 🧮 Cart Page
 export default function CartPage() {
-  const { cart, removeFromCart, increaseQuantity, decreaseQuantity } =
-    useContext(CartContext);
-  const { addToWishlist } = useContext(WishlistContext);
+  const {
+    cart,
+    removeFromCart,
+    increaseQuantity,
+    decreaseQuantity,
+    totalPrice,
+    totalOrgPrice,
+    totalDiscount,
+  } = useContext(CartContext);
 
-  const totalOrgPrice = cart.reduce(
-    (sum, item) => sum + item.orgprice * item.quantity,
-    0
-  );
-  const totalPrice = cart.reduce(
-    (sum, item) => sum + (item.basePrice ?? item.price) * item.quantity,
-    0
-  );
-  const totalDiscount = totalOrgPrice - totalPrice;
+  const { addToWishlist } = useContext(WishlistContext);
 
   return (
     <div style={{ padding: "20px" }}>
@@ -125,16 +140,19 @@ export default function CartPage() {
                   </h1>
                   <p>{item.details}</p>
                   <p style={{ fontSize: "x-large" }}>
-                    <b>Rs.{(item.basePrice ?? item.price) * item.quantity}</b>{" "}
-                    <span style={{ fontSize: "small" }}>
-                    </span>
+                    <b>Rs.{(item.basePrice ?? item.price) * item.quantity}</b>
                   </p>
                   <p style={{ textDecoration: "line-through" }}>
                     Rs.{item.orgprice * item.quantity}
                   </p>
                   <p style={{ color: "orange" }}>({item.off}% off)</p>
 
-                  <div style={{ position: "relative", left: "-118%", top: "-19%", display:"flex"
+                  <div
+                    style={{
+                      position: "relative",
+                      left: "-118%",
+                      top: "-19%",
+                      display: "flex",
                     }}
                   >
                     <button
@@ -143,18 +161,31 @@ export default function CartPage() {
                     >
                       Remove
                     </button>
-                    <button className="wish" onClick={() => { addToWishlist(item); removeFromCart(item.id);
+                    <button
+                      className="wish"
+                      onClick={() => {
+                        addToWishlist(item);
+                        removeFromCart(item.id);
                       }}
                     >
                       Move to WishList
                     </button>
 
-                     <div className="quantity-controls" style={{ padding: "7px"}}
-                  >
-                    <button className="q-button" onClick={() => decreaseQuantity(item.id)}>-</button>
-                    <span style={{ margin: "0 10px" }}>{item.quantity}</span>
-                    <button className="q-button" onClick={() => increaseQuantity(item.id)}>+</button>
-                  </div>
+                    <div className="quantity-controls" style={{ padding: "7px" }}>
+                      <button
+                        className="q-button"
+                        onClick={() => decreaseQuantity(item.id)}
+                      >
+                        -
+                      </button>
+                      <span style={{ margin: "0 10px" }}>{item.quantity}</span>
+                      <button
+                        className="q-button"
+                        onClick={() => increaseQuantity(item.id)}
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -195,13 +226,20 @@ export default function CartPage() {
                 color: "green",
               }}
             >
-              (You Saved:Rs.{totalDiscount})
+              (You Saved: Rs.{totalDiscount})
             </p>
-            <button className="buy-button">Proceed to Buy</button>
+            <a href="/savedaddress">
+              <button className="buy-button">Proceed to Buy</button>
+            </a>
           </div>
         </>
       ) : (
-        <p>No items in cart yet.</p>
+        <div>
+          <p>No items in cart yet.</p>
+          <a href="/addresss">
+            <button>add new address</button>
+          </a>
+        </div>
       )}
     </div>
   );

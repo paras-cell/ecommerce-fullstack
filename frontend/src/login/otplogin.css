@@ -1,5 +1,5 @@
 .outer-container{
-    background: beige;
+    background:linear-gradient(to right bottom, #9FA8DA, #EDE7F6);
     height: 404PX;
     padding: 80px 0 0 0;
 }

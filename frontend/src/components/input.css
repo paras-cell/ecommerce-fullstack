@@ -21,3 +21,21 @@
     border: 2px solid white;
     background-color: rgb(0, 110, 255);
 }
+
+.ic {
+  width: 100px;
+  height: 100px;
+  background-color: #000; /* or any color you want to show through the mask */
+
+  -webkit-mask-image: url('your-image.png');
+  mask-image: url('your-image.png');
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-size: contain;
+  mask-size: contain;
+
+  -webkit-mask-position: center;
+  mask-position: center;
+}

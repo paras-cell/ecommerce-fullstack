@@ -1,4 +1,4 @@
-import OTP from '../models/otpModel.js';
+import {OTP} from '../models/otpModel.js';
 import { sendEmail } from '../utils/mailer.js'; // Replace with your actual mailer
 import jwt from 'jsonwebtoken';
 

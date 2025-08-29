@@ -6,7 +6,7 @@ const Search = () => {
 
   // Sample data: Replace with actual page links and titles
   const pages = [
-    { title: "men tshirt", link: "tshirt" },
+    { title: "men tshirt", link: "/tshirt" },
     { title: "Samsung Galaxy S23", link: "/products/galaxy-s23" },
     { title: "Nike Shoes", link: "/products/nike-shoes" },
     { title: "Apple MacBook", link: "/products/macbook" },

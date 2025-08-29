@@ -2,7 +2,9 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import otpRoutes from './routes/otpRoutes.js';
+
+import otpRoutes from './routes/otproutes.js';
+import addressRoutes from './routes/otproutes.js';
 
 dotenv.config();
 
@@ -15,9 +17,10 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(err => console.error('MongoDB connection error:', err));
 
 app.use('/api/otp', otpRoutes);
+app.use('/api/address', addressRoutes);
 
 app.get('/', (req, res) => {
-  res.send('Welcome to the OTP Login Backend!');
+  res.send('Backend is running!');
 });
 
 const PORT = process.env.PORT || 5000;
