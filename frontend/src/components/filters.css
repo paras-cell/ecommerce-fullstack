@@ -1,0 +1,29 @@
+.filters {
+    width: 23%;
+    background-color: #f0f8ff4f;
+    height: 100%;
+    position: relative;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #80808059;
+}
+
+.filter_list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    list-style-type: none;
+}
+
+.brand,
+.gender,
+.Price ,
+.color,
+.Discount_Range{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0 25px 10px;
+    border-bottom: 1px solid #80808059
+
+}

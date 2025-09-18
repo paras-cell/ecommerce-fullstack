@@ -1,0 +1,41 @@
+
+.btlabel{
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    user-select: none;
+}
+.radiobt{
+    appearance: none;
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    width: 11px;
+    height: 11px;
+    border: 1.5px solid rgb(53, 52, 52);
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.radiobt:checked{
+    border: 2px solid white;
+    background-color: rgb(0, 110, 255);
+}
+
+.ic {
+  width: 100px;
+  height: 100px;
+  background-color: #000; /* or any color you want to show through the mask */
+
+  -webkit-mask-image: url('your-image.png');
+  mask-image: url('your-image.png');
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-size: contain;
+  mask-size: contain;
+
+  -webkit-mask-position: center;
+  mask-position: center;
+}
