@@ -1,0 +1,66 @@
+.card-container {
+    height: 350px;
+    width: 210px;
+    background-color: #faebd733;
+   
+}
+.card-container:hover{
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card {
+    height: 270px;
+    width: 210px;
+}
+
+.rating {
+    height: 20px;
+    width: 48px;
+    display: block;
+    position: absolute;
+    margin-top: 234px;
+    margin-left: 5px;
+    font-size: small;
+    background-color: white;
+    padding-left: 5px;
+}
+.card-hover-wishbutton {
+    display: none;
+    position: absolute;
+    height: 60px;
+    width: 210px;
+    background-color: white;
+    margin-top: 262px;
+    flex-direction: column;
+}
+.wishbutton{
+    margin: 7px;
+    height: 30px;
+    background-color: whitesmoke;
+    border: solid gray 1.5px;
+    text-transform: uppercase;
+    cursor:pointer;
+}
+
+.card-image {
+    height: 270px;
+    width: 210px;
+}
+
+.card-brandname {
+    display: flex;
+    flex-direction: column;
+    padding: 0 13px;
+    gap: 4px;
+    font-size: small;
+    
+}
+.price{
+    font-size: medium;
+    margin-top: 5px;
+    
+}
+.price-off{
+    font-size: small;
+    margin-left:4px ; 
+}
