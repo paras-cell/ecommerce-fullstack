@@ -11,10 +11,15 @@ const SavedAddresses = () => {
   const navigate = useNavigate();
   const { setSelectedAddress } = useAddress();
 
+    const baseURL =
+  window.location.hostname === "localhost"
+    ? import.meta.env.VITE_API_BASE_URL
+    : "https://ecommerce-fullstack-q30o.onrender.com";
+
   useEffect(() => {
     const fetchAddresses = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/address/all');
+        const res = await fetch(`${baseURL}/api/address/all`);
         const data = await res.json();
         console.log("Fetched addresses:", data);
 
@@ -36,7 +41,7 @@ const SavedAddresses = () => {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:5000/api/address/delete/${id}`, {
+      await fetch(`${baseURL}/api/address/delete/${id}`, {
         method: 'DELETE',
       });
       setAddresses((prev) => prev.filter((addr) => addr._id !== id));

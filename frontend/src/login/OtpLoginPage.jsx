@@ -10,6 +10,11 @@ const OtpLoginPage = () => {
   const [countdown, setCountdown] = useState(0);
   const navigate = useNavigate();
 
+    const baseURL =
+  window.location.hostname === "localhost"
+    ? import.meta.env.VITE_API_BASE_URL
+    : "https://ecommerce-fullstack-q30o.onrender.com";
+
   // ⏳ Countdown effect
   useEffect(() => {
     let timer;
@@ -21,7 +26,7 @@ const OtpLoginPage = () => {
 
   const sendOtp = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/otp/send', {
+      const res = await fetch(`${baseURL}/api/otp/send`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
@@ -61,7 +66,7 @@ const OtpLoginPage = () => {
     }
 
     try {
-      const res = await fetch('http://localhost:5000/api/otp/verify', {
+      const res = await fetch(`${baseURL}/api/otp/verify`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, otp }),
