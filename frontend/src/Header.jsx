@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import "./Header.css";
-import Catlogmen from "./catlog/Catlogmen.jsx";
+import Catlogmen from "./catlog/catlogmen.jsx";
 import Catlogwomen from "./catlog/catlogwomen.jsx";
 import Catlogkids from "./catlog/catlogkids.jsx";
 import Catloghome from "./catlog/catloghome.jsx";

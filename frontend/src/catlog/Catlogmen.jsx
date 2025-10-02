@@ -1,5 +1,5 @@
 import React, { useRef, forwardRef, useImperativeHandle } from 'react';
-import './catlog.css';
+import './Catlog.css';
 
 const Catlogmen = forwardRef((props, ref) => {
     const catlogreff = useRef(null);
