@@ -27,8 +27,8 @@
   height: 100px;
   background-color: #000; /* or any color you want to show through the mask */
 
-  -webkit-mask-image: url('your-image.png');
-  mask-image: url('your-image.png');
+  -webkit-mask-image: url('/your-image.png');
+  mask-image: url('/your-image.png');
 
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;

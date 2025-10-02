@@ -21,14 +21,14 @@
 .offer2 {
     height: 80px;
     width: 95%;
-    background-image: url("free-div.png");
+    background-image: url("/free-div.png");
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 50px;
 }
 
 .offer {
-    background-image: url("offer.png");
+    background-image: url("/offer.png");
 }
 
 @media (max-width:1100px) {
