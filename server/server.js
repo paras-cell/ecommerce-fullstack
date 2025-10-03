@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import compression from 'compression';
 
 import otpRoutes from './routes/otproutes.js';
 import addressRoutes from './routes/otproutes.js';
