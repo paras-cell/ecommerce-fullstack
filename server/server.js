@@ -9,8 +9,16 @@ import addressRoutes from './routes/otproutes.js';
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173', // local dev
+    'https://your-frontend.onrender.com' // replace with actual frontend URL
+  ],
+  credentials: true
+}));
 app.use(express.json());
+app.use(compression({ threshold: 0 }));
+
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
