@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import Intropage from "./home.jsx";
 import Menpage from "./filterpage/menpage.jsx";
@@ -31,7 +26,7 @@ import ProductSummary from "./order/ProductSummary.jsx";
 import ProductPage from "./Productpage.jsx";
 import SplashScreen from "./splash.jsx";
 
-function Layout() {
+function App() {
   const location = useLocation();
   const [showSplash, setShowSplash] = useState(location.pathname === "/");
 
@@ -41,6 +36,8 @@ function Layout() {
         setShowSplash(false);
       }, 3000); // Show splash for 3 seconds
       return () => clearTimeout(timer);
+    } else {
+      setShowSplash(false); // Disable splash on other routes
     }
   }, [location.pathname]);
 
@@ -99,14 +96,6 @@ function Layout() {
       </Routes>
       {shouldShowHeader && <Footer />}
     </>
-  );
-}
-
-function App() {
-  return (
-    <Router>
-      <Layout />
-    </Router>
   );
 }
 
